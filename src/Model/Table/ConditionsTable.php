@@ -33,7 +33,7 @@ class ConditionsTable extends Table
         parent::initialize($config);
 
         $this->table('conditions');
-        $this->displayField('id');
+        $this->displayField('bezeichnung');
         $this->primaryKey('id');
 
         $this->hasMany('Reports', [

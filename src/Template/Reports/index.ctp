@@ -30,10 +30,10 @@
             <tr>
                 <td><?= $this->Number->format($report->id) ?></td>
                 <td><?= $this->Number->format($report->valve_id) ?></td>
-                <td><?= $report->has('operation') ? $this->Html->link($report->operation->id, ['controller' => 'Operations', 'action' => 'view', $report->operation->id]) : '' ?></td>
+                <td><?= $report->has('operation') ? $this->Html->link($report->operation->bezeichnung, ['controller' => 'Operations', 'action' => 'view', $report->operation->id]) : '' ?></td>
                 <td><?= h($report->datum) ?></td>
                 <td><?= h($report->beschreibung) ?></td>
-                <td><?= $report->has('condition') ? $this->Html->link($report->condition->id, ['controller' => 'Conditions', 'action' => 'view', $report->condition->id]) : '' ?></td>
+                <td><?= $report->has('condition') ? $this->Html->link($report->condition->bezeichnung, ['controller' => 'Conditions', 'action' => 'view', $report->condition->id]) : '' ?></td>
                 <td><?= h($report->bild) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $report->id]) ?>

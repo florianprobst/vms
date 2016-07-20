@@ -19,7 +19,7 @@ class ValvesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Manufacturers', 'Stocks', 'Customers', 'Reports']
+            'contain' => ['Manufacturers', 'Stocks', 'Customers', 'Flangetypes', 'Valvetypes', 'Actuators', 'Materials', 'Gaskets', 'Boltings']
         ];
         $valves = $this->paginate($this->Valves);
 
@@ -37,7 +37,7 @@ class ValvesController extends AppController
     public function view($id = null)
     {
         $valf = $this->Valves->get($id, [
-            'contain' => ['Manufacturers', 'Stocks', 'Customers', 'Reports']
+            'contain' => ['Manufacturers', 'Stocks', 'Customers', 'Flangetypes', 'Valvetypes', 'Actuators', 'Materials', 'Gaskets', 'Boltings']
         ]);
 
         $this->set('valf', $valf);
@@ -64,8 +64,13 @@ class ValvesController extends AppController
         $manufacturers = $this->Valves->Manufacturers->find('list', ['limit' => 200]);
         $stocks = $this->Valves->Stocks->find('list', ['limit' => 200]);
         $customers = $this->Valves->Customers->find('list', ['limit' => 200]);
-        $reports = $this->Valves->Reports->find('list', ['limit' => 200]);
-        $this->set(compact('valf', 'manufacturers', 'stocks', 'customers', 'reports'));
+        $flangetypes = $this->Valves->Flangetypes->find('list', ['limit' => 200]);
+        $valvetypes = $this->Valves->Valvetypes->find('list', ['limit' => 200]);
+        $actuators = $this->Valves->Actuators->find('list', ['limit' => 200]);
+        $materials = $this->Valves->Materials->find('list', ['limit' => 200]);
+        $gaskets = $this->Valves->Gaskets->find('list', ['limit' => 200]);
+        $boltings = $this->Valves->Boltings->find('list', ['limit' => 200]);
+        $this->set(compact('valf', 'manufacturers', 'stocks', 'customers', 'flangetypes', 'valvetypes', 'actuators', 'materials', 'gaskets', 'boltings'));
         $this->set('_serialize', ['valf']);
     }
 
@@ -93,8 +98,13 @@ class ValvesController extends AppController
         $manufacturers = $this->Valves->Manufacturers->find('list', ['limit' => 200]);
         $stocks = $this->Valves->Stocks->find('list', ['limit' => 200]);
         $customers = $this->Valves->Customers->find('list', ['limit' => 200]);
-        $reports = $this->Valves->Reports->find('list', ['limit' => 200]);
-        $this->set(compact('valf', 'manufacturers', 'stocks', 'customers', 'reports'));
+        $flangetypes = $this->Valves->Flangetypes->find('list', ['limit' => 200]);
+        $valvetypes = $this->Valves->Valvetypes->find('list', ['limit' => 200]);
+        $actuators = $this->Valves->Actuators->find('list', ['limit' => 200]);
+        $materials = $this->Valves->Materials->find('list', ['limit' => 200]);
+        $gaskets = $this->Valves->Gaskets->find('list', ['limit' => 200]);
+        $boltings = $this->Valves->Boltings->find('list', ['limit' => 200]);
+        $this->set(compact('valf', 'manufacturers', 'stocks', 'customers', 'flangetypes', 'valvetypes', 'actuators', 'materials', 'gaskets', 'boltings'));
         $this->set('_serialize', ['valf']);
     }
 

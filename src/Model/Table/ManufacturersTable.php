@@ -33,7 +33,7 @@ class ManufacturersTable extends Table
         parent::initialize($config);
 
         $this->table('manufacturers');
-        $this->displayField('id');
+        $this->displayField('name');
         $this->primaryKey('id');
 
         $this->hasMany('Valves', [

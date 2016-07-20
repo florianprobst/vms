@@ -30,9 +30,15 @@ class ValvesTableTest extends TestCase
         'app.customers',
         'app.contacts',
         'app.users',
-        'app.reports',
-        'app.operations',
-        'app.conditions'
+        'app.flangetypes',
+        'app.valvetypes',
+        'app.actuators',
+        'app.actuatortypes',
+        'app.materials',
+        'app.gaskets',
+        'app.gaskettypes',
+        'app.boltings',
+        'app.boltclasses'
     ];
 
     /**

@@ -12,7 +12,12 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Manufacturers
  * @property \Cake\ORM\Association\BelongsTo $Stocks
  * @property \Cake\ORM\Association\BelongsTo $Customers
- * @property \Cake\ORM\Association\BelongsTo $Reports
+ * @property \Cake\ORM\Association\BelongsTo $Flangetypes
+ * @property \Cake\ORM\Association\BelongsTo $Valvetypes
+ * @property \Cake\ORM\Association\BelongsTo $Actuators
+ * @property \Cake\ORM\Association\BelongsTo $Materials
+ * @property \Cake\ORM\Association\BelongsTo $Gaskets
+ * @property \Cake\ORM\Association\BelongsTo $Boltings
  *
  * @method \App\Model\Entity\Valf get($primaryKey, $options = [])
  * @method \App\Model\Entity\Valf newEntity($data = null, array $options = [])
@@ -36,7 +41,7 @@ class ValvesTable extends Table
         parent::initialize($config);
 
         $this->table('valves');
-        $this->displayField('id');
+        $this->displayField('equino');
         $this->primaryKey('id');
 
         $this->belongsTo('Manufacturers', [
@@ -51,9 +56,28 @@ class ValvesTable extends Table
             'foreignKey' => 'customer_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Reports', [
-            'foreignKey' => 'report_id',
+        $this->belongsTo('Flangetypes', [
+            'foreignKey' => 'flangetype_id',
             'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Valvetypes', [
+            'foreignKey' => 'valvetype_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Actuators', [
+            'foreignKey' => 'actuator_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Materials', [
+            'foreignKey' => 'material_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Gaskets', [
+            'foreignKey' => 'gasket_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Boltings', [
+            'foreignKey' => 'bolting_id'
         ]);
     }
 
@@ -70,8 +94,13 @@ class ValvesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('typ', 'create')
-            ->notEmpty('typ');
+            ->requirePresence('equino', 'create')
+            ->notEmpty('equino')
+            ->add('equino', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->allowEmpty('actuatorsn')
+            ->add('actuatorsn', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->integer('dn')
@@ -85,12 +114,41 @@ class ValvesTable extends Table
 
         $validator
             ->integer('einbaulaenge')
-            ->requirePresence('einbaulaenge', 'create')
-            ->notEmpty('einbaulaenge');
+            ->allowEmpty('einbaulaenge');
 
         $validator
-            ->requirePresence('besonderheiten', 'create')
-            ->notEmpty('besonderheiten');
+            ->allowEmpty('besonderheiten');
+
+        $validator
+            ->integer('baujahr')
+            ->allowEmpty('baujahr');
+
+        $validator
+            ->integer('d0')
+            ->allowEmpty('d0');
+
+        $validator
+            ->integer('ansprechdruck')
+            ->allowEmpty('ansprechdruck');
+
+        $validator
+            ->allowEmpty('kopfdichtungabmessung');
+
+        $validator
+            ->allowEmpty('spindelabmessungen');
+
+        $validator
+            ->allowEmpty('stopfbuchsenbrilleabmessungen');
+
+        $validator
+            ->integer('anzahlpackungsringe')
+            ->allowEmpty('anzahlpackungsringe');
+
+        $validator
+            ->allowEmpty('packungsringabmessung');
+
+        $validator
+            ->allowEmpty('grundringabmessung');
 
         return $validator;
     }
@@ -104,10 +162,17 @@ class ValvesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        $rules->add($rules->isUnique(['equino']));
+        $rules->add($rules->isUnique(['actuatorsn']));
         $rules->add($rules->existsIn(['manufacturer_id'], 'Manufacturers'));
         $rules->add($rules->existsIn(['stock_id'], 'Stocks'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
-        $rules->add($rules->existsIn(['report_id'], 'Reports'));
+        $rules->add($rules->existsIn(['flangetype_id'], 'Flangetypes'));
+        $rules->add($rules->existsIn(['valvetype_id'], 'Valvetypes'));
+        $rules->add($rules->existsIn(['actuator_id'], 'Actuators'));
+        $rules->add($rules->existsIn(['material_id'], 'Materials'));
+        $rules->add($rules->existsIn(['gasket_id'], 'Gaskets'));
+        $rules->add($rules->existsIn(['bolting_id'], 'Boltings'));
         return $rules;
     }
 }

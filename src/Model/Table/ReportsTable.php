@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Valves
  * @property \Cake\ORM\Association\BelongsTo $Operations
  * @property \Cake\ORM\Association\BelongsTo $Conditions
- * @property \Cake\ORM\Association\HasMany $Valves
  *
  * @method \App\Model\Entity\Report get($primaryKey, $options = [])
  * @method \App\Model\Entity\Report newEntity($data = null, array $options = [])
@@ -50,9 +49,6 @@ class ReportsTable extends Table
         $this->belongsTo('Conditions', [
             'foreignKey' => 'condition_id',
             'joinType' => 'INNER'
-        ]);
-        $this->hasMany('Valves', [
-            'foreignKey' => 'report_id'
         ]);
     }
 

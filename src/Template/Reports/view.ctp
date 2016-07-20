@@ -18,7 +18,7 @@
     <table class="vertical-table">
         <tr>
             <th><?= __('Operation') ?></th>
-            <td><?= $report->has('operation') ? $this->Html->link($report->operation->id, ['controller' => 'Operations', 'action' => 'view', $report->operation->id]) : '' ?></td>
+            <td><?= $report->has('operation') ? $this->Html->link($report->operation->bezeichnung, ['controller' => 'Operations', 'action' => 'view', $report->operation->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Beschreibung') ?></th>
@@ -26,7 +26,7 @@
         </tr>
         <tr>
             <th><?= __('Condition') ?></th>
-            <td><?= $report->has('condition') ? $this->Html->link($report->condition->id, ['controller' => 'Conditions', 'action' => 'view', $report->condition->id]) : '' ?></td>
+            <td><?= $report->has('condition') ? $this->Html->link($report->condition->bezeichnung, ['controller' => 'Conditions', 'action' => 'view', $report->condition->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Bild') ?></th>
@@ -59,7 +59,6 @@
                 <th><?= __('Pn') ?></th>
                 <th><?= __('Einbaulaenge') ?></th>
                 <th><?= __('Besonderheiten') ?></th>
-                <th><?= __('Report Id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($report->valves as $valves): ?>
@@ -73,7 +72,6 @@
                 <td><?= h($valves->pn) ?></td>
                 <td><?= h($valves->einbaulaenge) ?></td>
                 <td><?= h($valves->besonderheiten) ?></td>
-                <td><?= h($valves->report_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Valves', 'action' => 'view', $valves->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Valves', 'action' => 'edit', $valves->id]) ?>

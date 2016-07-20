@@ -33,7 +33,7 @@ class StocksTable extends Table
         parent::initialize($config);
 
         $this->table('stocks');
-        $this->displayField('id');
+        $this->displayField('lagerort');
         $this->primaryKey('id');
 
         $this->hasMany('Valves', [
