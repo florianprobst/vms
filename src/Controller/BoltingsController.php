@@ -37,7 +37,7 @@ class BoltingsController extends AppController
     public function view($id = null)
     {
         $bolting = $this->Boltings->get($id, [
-            'contain' => ['Boltclasses', 'Materials']
+            'contain' => ['Boltclasses', 'Materials', 'Valves']
         ]);
 
         $this->set('bolting', $bolting);

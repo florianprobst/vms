@@ -6,6 +6,8 @@
         <li><?= $this->Html->link(__('New Boltclass'), ['controller' => 'Boltclasses', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Materials'), ['controller' => 'Materials', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Material'), ['controller' => 'Materials', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Valves'), ['controller' => 'Valves', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Valf'), ['controller' => 'Valves', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="boltings index large-9 medium-8 columns content">
@@ -17,6 +19,8 @@
                 <th><?= $this->Paginator->sort('boltclasse_id') ?></th>
                 <th><?= $this->Paginator->sort('schraubenanzahl') ?></th>
                 <th><?= $this->Paginator->sort('muttern') ?></th>
+                <th><?= $this->Paginator->sort('schraubenlaenge') ?></th>
+                <th><?= $this->Paginator->sort('schraubenart') ?></th>
                 <th><?= $this->Paginator->sort('material_id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -28,6 +32,8 @@
                 <td><?= $bolting->has('boltclass') ? $this->Html->link($bolting->boltclass->festigkeitsklasse, ['controller' => 'Boltclasses', 'action' => 'view', $bolting->boltclass->id]) : '' ?></td>
                 <td><?= $this->Number->format($bolting->schraubenanzahl) ?></td>
                 <td><?= h($bolting->muttern) ?></td>
+                <td><?= $this->Number->format($bolting->schraubenlaenge) ?></td>
+                <td><?= h($bolting->schraubenart) ?></td>
                 <td><?= $bolting->has('material') ? $this->Html->link($bolting->material->full_name, ['controller' => 'Materials', 'action' => 'view', $bolting->material->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $bolting->id]) ?>

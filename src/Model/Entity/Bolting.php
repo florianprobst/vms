@@ -11,10 +11,12 @@ use Cake\Datasource\ConnectionManager;
  * @property int $boltclasse_id
  * @property int $schraubenanzahl
  * @property string $muttern
+ * @property float $schraubenlaenge
  * @property int $material_id
  *
  * @property \App\Model\Entity\Boltclass $boltclass
  * @property \App\Model\Entity\Material $material
+ * @property \App\Model\Entity\Valf[] $valves
  */
 class Bolting extends Entity
 {
@@ -51,6 +53,6 @@ class Bolting extends Entity
     		$werkstoff = $row['werkstoffnummer'];
     	}
     	
-    	return $this->_properties['schraubenanzahl'] . ' Stk. | Festigkeit: ' . $festigkeitsklasse . ' | Werkstoff: ' . $werkstoff . ' | Muttern: ' . $this->_properties['muttern'];
+    	return $this->_properties['schraubenanzahl'] . ' x ' . $this->_properties['schraubenlaenge'] .' mm ' . $this->_properties['schraubenart'] . ' | Festigkeit: ' . $festigkeitsklasse . ' | Werkstoff: ' . $werkstoff . ' | Muttern: ' . $this->_properties['muttern'];
     }
 }

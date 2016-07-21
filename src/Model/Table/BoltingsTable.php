@@ -71,6 +71,15 @@ class BoltingsTable extends Table
             ->requirePresence('muttern', 'create')
             ->notEmpty('muttern');
 
+        $validator
+            ->numeric('schraubenlaenge')
+            ->requirePresence('schraubenlaenge', 'create')
+            ->notEmpty('schraubenlaenge');
+
+        $validator
+            ->requirePresence('schraubenart', 'create')
+            ->notEmpty('schraubenart');
+
         return $validator;
     }
 
