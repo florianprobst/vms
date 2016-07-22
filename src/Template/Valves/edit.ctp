@@ -26,6 +26,8 @@
         <li><?= $this->Html->link(__('New Gasket'), ['controller' => 'Gaskets', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Boltings'), ['controller' => 'Boltings', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Bolting'), ['controller' => 'Boltings', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Reports'), ['controller' => 'Reports', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Report'), ['controller' => 'Reports', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="valves form large-9 medium-8 columns content">
@@ -33,24 +35,24 @@
     <fieldset>
         <legend><?= __('Edit Valf') ?></legend>
         <?php
-            echo $this->Form->input('manufacturer_id', ['options' => $manufacturers]);
-            echo $this->Form->input('stock_id', ['options' => $stocks]);
+            echo $this->Form->input('manufacturer_id', ['options' => $manufacturers, 'empty' => true]);
+            echo $this->Form->input('stock_id', ['options' => $stocks, 'empty' => true]);
             echo $this->Form->input('customer_id', ['options' => $customers]);
-            echo $this->Form->input('equino');
-            echo $this->Form->input('flangetype_id', ['options' => $flangetypes]);
-            echo $this->Form->input('valvetype_id', ['options' => $valvetypes]);
-            echo $this->Form->input('actuator_id', ['options' => $actuators]);
+            echo $this->Form->input('etag');
+            echo $this->Form->input('flangetype_id', ['options' => $flangetypes, 'empty' => true]);
+            echo $this->Form->input('valvetype_id', ['options' => $valvetypes, 'empty' => true]);
+            echo $this->Form->input('actuator_id', ['options' => $actuators, 'empty' => true]);
             echo $this->Form->input('actuatorsn');
             echo $this->Form->input('dn');
             echo $this->Form->input('pn');
             echo $this->Form->input('einbaulaenge');
             echo $this->Form->input('besonderheiten');
             echo $this->Form->input('baujahr');
-            echo $this->Form->input('material_id', ['options' => $materials]);
+            echo $this->Form->input('material_id', ['options' => $materials, 'empty' => true]);
             echo $this->Form->input('d0');
             echo $this->Form->input('ansprechdruck');
             echo $this->Form->input('kopfdichtungabmessung');
-            echo $this->Form->input('gasket_id', ['options' => $gaskets]);
+            echo $this->Form->input('gasket_id', ['options' => $gaskets, 'empty' => true]);
             echo $this->Form->input('spindelabmessungen');
             echo $this->Form->input('stopfbuchsenbrilleabmessungen');
             echo $this->Form->input('anzahlpackungsringe');

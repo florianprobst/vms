@@ -14,7 +14,7 @@ use Cake\ORM\Entity;
  * @property int $condition_id
  * @property string $bild
  *
- * @property \App\Model\Entity\Valf[] $valves
+ * @property \App\Model\Entity\Valf $valf
  * @property \App\Model\Entity\Operation $operation
  * @property \App\Model\Entity\Condition $condition
  */

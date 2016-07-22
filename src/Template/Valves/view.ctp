@@ -23,10 +23,12 @@
         <li><?= $this->Html->link(__('New Gasket'), ['controller' => 'Gaskets', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Boltings'), ['controller' => 'Boltings', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Bolting'), ['controller' => 'Boltings', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Reports'), ['controller' => 'Reports', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Report'), ['controller' => 'Reports', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="valves view large-9 medium-8 columns content">
-    <h3><?= h($valf->equino) ?></h3>
+    <h3><?= h($valf->etag) ?></h3>
     <table class="vertical-table">
         <tr>
             <th><?= __('Manufacturer') ?></th>
@@ -41,8 +43,8 @@
             <td><?= $valf->has('customer') ? $this->Html->link($valf->customer->name, ['controller' => 'Customers', 'action' => 'view', $valf->customer->id]) : '' ?></td>
         </tr>
         <tr>
-            <th><?= __('Equino') ?></th>
-            <td><?= h($valf->equino) ?></td>
+            <th><?= __('Etag') ?></th>
+            <td><?= h($valf->etag) ?></td>
         </tr>
         <tr>
             <th><?= __('Flangetype') ?></th>
@@ -129,4 +131,37 @@
             <td><?= $this->Number->format($valf->anzahlpackungsringe) ?></td>
         </tr>
     </table>
+    <div class="related">
+        <h4><?= __('Related Reports') ?></h4>
+        <?php if (!empty($valf->reports)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th><?= __('Id') ?></th>
+                <th><?= __('Valve Id') ?></th>
+                <th><?= __('Operation Id') ?></th>
+                <th><?= __('Datum') ?></th>
+                <th><?= __('Beschreibung') ?></th>
+                <th><?= __('Condition Id') ?></th>
+                <th><?= __('Bild') ?></th>
+                <th class="actions"><?= __('Actions') ?></th>
+            </tr>
+            <?php foreach ($valf->reports as $reports): ?>
+            <tr>
+                <td><?= h($reports->id) ?></td>
+                <td><?= h($reports->valve_id) ?></td>
+                <td><?= h($reports->operation_id) ?></td>
+                <td><?= h($reports->datum) ?></td>
+                <td><?= h($reports->beschreibung) ?></td>
+                <td><?= h($reports->condition_id) ?></td>
+                <td><?= h($reports->bild) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Reports', 'action' => 'view', $reports->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Reports', 'action' => 'edit', $reports->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Reports', 'action' => 'delete', $reports->id], ['confirm' => __('Are you sure you want to delete # {0}?', $reports->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+    </div>
 </div>

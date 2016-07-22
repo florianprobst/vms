@@ -10,7 +10,7 @@ use Cake\ORM\Entity;
  * @property int $manufacturer_id
  * @property int $stock_id
  * @property int $customer_id
- * @property string $equino
+ * @property string $etag
  * @property int $flangetype_id
  * @property int $valvetype_id
  * @property int $actuator_id
@@ -41,6 +41,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Material $material
  * @property \App\Model\Entity\Gasket $gasket
  * @property \App\Model\Entity\Bolting $bolting
+ * @property \App\Model\Entity\Report[] $reports
  */
 class Valf extends Entity
 {

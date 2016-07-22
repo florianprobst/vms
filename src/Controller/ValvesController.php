@@ -37,7 +37,7 @@ class ValvesController extends AppController
     public function view($id = null)
     {
         $valf = $this->Valves->get($id, [
-            'contain' => ['Manufacturers', 'Stocks', 'Customers', 'Flangetypes', 'Valvetypes', 'Actuators', 'Materials', 'Gaskets', 'Boltings']
+            'contain' => ['Manufacturers', 'Stocks', 'Customers', 'Flangetypes', 'Valvetypes', 'Actuators', 'Materials', 'Gaskets', 'Boltings', 'Reports']
         ]);
 
         $this->set('valf', $valf);

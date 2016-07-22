@@ -49,7 +49,7 @@ class ReportsFixture extends TestFixture
             'id' => 1,
             'valve_id' => 1,
             'operation_id' => 1,
-            'datum' => '2016-07-20 08:21:40',
+            'datum' => '2016-07-21 14:38:09',
             'beschreibung' => 'Lorem ipsum dolor sit amet',
             'condition_id' => 1,
             'bild' => 'Lorem ipsum dolor sit amet'

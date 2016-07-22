@@ -20,6 +20,8 @@
         <li><?= $this->Html->link(__('New Gasket'), ['controller' => 'Gaskets', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Boltings'), ['controller' => 'Boltings', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Bolting'), ['controller' => 'Boltings', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Reports'), ['controller' => 'Reports', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Report'), ['controller' => 'Reports', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="valves index large-9 medium-8 columns content">
@@ -31,7 +33,7 @@
                 <th><?= $this->Paginator->sort('manufacturer_id') ?></th>
                 <th><?= $this->Paginator->sort('stock_id') ?></th>
                 <th><?= $this->Paginator->sort('customer_id') ?></th>
-                <th><?= $this->Paginator->sort('equino') ?></th>
+                <th><?= $this->Paginator->sort('etag') ?></th>
                 <th><?= $this->Paginator->sort('flangetype_id') ?></th>
                 <th><?= $this->Paginator->sort('valvetype_id') ?></th>
                 <th><?= $this->Paginator->sort('actuator_id') ?></th>
@@ -62,7 +64,7 @@
                 <td><?= $valf->has('manufacturer') ? $this->Html->link($valf->manufacturer->name, ['controller' => 'Manufacturers', 'action' => 'view', $valf->manufacturer->id]) : '' ?></td>
                 <td><?= $valf->has('stock') ? $this->Html->link($valf->stock->lagerort, ['controller' => 'Stocks', 'action' => 'view', $valf->stock->id]) : '' ?></td>
                 <td><?= $valf->has('customer') ? $this->Html->link($valf->customer->name, ['controller' => 'Customers', 'action' => 'view', $valf->customer->id]) : '' ?></td>
-                <td><?= h($valf->equino) ?></td>
+                <td><?= h($valf->etag) ?></td>
                 <td><?= $valf->has('flangetype') ? $this->Html->link($valf->flangetype->bezeichnung, ['controller' => 'Flangetypes', 'action' => 'view', $valf->flangetype->id]) : '' ?></td>
                 <td><?= $valf->has('valvetype') ? $this->Html->link($valf->valvetype->bezeichnung, ['controller' => 'Valvetypes', 'action' => 'view', $valf->valvetype->id]) : '' ?></td>
                 <td><?= $valf->has('actuator') ? $this->Html->link($valf->actuator->bezeichnung, ['controller' => 'Actuators', 'action' => 'view', $valf->actuator->id]) : '' ?></td>

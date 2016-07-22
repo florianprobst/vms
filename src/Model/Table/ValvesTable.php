@@ -41,43 +41,40 @@ class ValvesTable extends Table
         parent::initialize($config);
 
         $this->table('valves');
-        $this->displayField('equino');
+        $this->displayField('etag');
         $this->primaryKey('id');
 
         $this->belongsTo('Manufacturers', [
-            'foreignKey' => 'manufacturer_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'manufacturer_id'
         ]);
         $this->belongsTo('Stocks', [
-            'foreignKey' => 'stock_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'stock_id'
         ]);
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Flangetypes', [
-            'foreignKey' => 'flangetype_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'flangetype_id'
         ]);
         $this->belongsTo('Valvetypes', [
-            'foreignKey' => 'valvetype_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'valvetype_id'
         ]);
         $this->belongsTo('Actuators', [
-            'foreignKey' => 'actuator_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'actuator_id'
         ]);
         $this->belongsTo('Materials', [
-            'foreignKey' => 'material_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'material_id'
         ]);
         $this->belongsTo('Gaskets', [
-            'foreignKey' => 'gasket_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'gasket_id'
         ]);
         $this->belongsTo('Boltings', [
             'foreignKey' => 'bolting_id'
+        ]);
+        $this->hasMany('Reports', [
+            'foreignKey' => 'valve_id',
+            'dependent' => true,
         ]);
     }
 
@@ -94,13 +91,12 @@ class ValvesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('equino', 'create')
-            ->notEmpty('equino')
-            ->add('equino', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->requirePresence('etag', 'create')
+            ->notEmpty('etag')
+            ->add('etag', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->allowEmpty('actuatorsn')
-            ->add('actuatorsn', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->allowEmpty('actuatorsn');
 
         $validator
             ->integer('dn')
@@ -162,8 +158,7 @@ class ValvesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['equino']));
-        $rules->add($rules->isUnique(['actuatorsn']));
+        $rules->add($rules->isUnique(['etag']));
         $rules->add($rules->existsIn(['manufacturer_id'], 'Manufacturers'));
         $rules->add($rules->existsIn(['stock_id'], 'Stocks'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));

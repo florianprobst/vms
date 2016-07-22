@@ -19,7 +19,7 @@ class ReportsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Operations', 'Conditions']
+            'contain' => ['Valves', 'Operations', 'Conditions']
         ];
         $reports = $this->paginate($this->Reports);
 
@@ -37,7 +37,7 @@ class ReportsController extends AppController
     public function view($id = null)
     {
         $report = $this->Reports->get($id, [
-            'contain' => ['Operations', 'Conditions', 'Valves']
+            'contain' => ['Valves', 'Operations', 'Conditions']
         ]);
 
         $this->set('report', $report);
@@ -61,9 +61,10 @@ class ReportsController extends AppController
                 $this->Flash->error(__('The report could not be saved. Please, try again.'));
             }
         }
+        $valves = $this->Reports->Valves->find('list', ['limit' => 200]);
         $operations = $this->Reports->Operations->find('list', ['limit' => 200]);
         $conditions = $this->Reports->Conditions->find('list', ['limit' => 200]);
-        $this->set(compact('report', 'operations', 'conditions'));
+        $this->set(compact('report', 'valves', 'operations', 'conditions'));
         $this->set('_serialize', ['report']);
     }
 
@@ -88,9 +89,10 @@ class ReportsController extends AppController
                 $this->Flash->error(__('The report could not be saved. Please, try again.'));
             }
         }
+        $valves = $this->Reports->Valves->find('list', ['limit' => 200]);
         $operations = $this->Reports->Operations->find('list', ['limit' => 200]);
         $conditions = $this->Reports->Conditions->find('list', ['limit' => 200]);
-        $this->set(compact('report', 'operations', 'conditions'));
+        $this->set(compact('report', 'valves', 'operations', 'conditions'));
         $this->set('_serialize', ['report']);
     }
 

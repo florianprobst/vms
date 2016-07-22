@@ -2,12 +2,12 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Report'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Valves'), ['controller' => 'Valves', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Valf'), ['controller' => 'Valves', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Operations'), ['controller' => 'Operations', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Operation'), ['controller' => 'Operations', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Conditions'), ['controller' => 'Conditions', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Condition'), ['controller' => 'Conditions', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Valves'), ['controller' => 'Valves', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Valf'), ['controller' => 'Valves', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="reports index large-9 medium-8 columns content">
@@ -29,7 +29,7 @@
             <?php foreach ($reports as $report): ?>
             <tr>
                 <td><?= $this->Number->format($report->id) ?></td>
-                <td><?= $this->Number->format($report->valve_id) ?></td>
+                <td><?= $report->has('valf') ? $this->Html->link($report->valf->etag, ['controller' => 'Valves', 'action' => 'view', $report->valf->id]) : '' ?></td>
                 <td><?= $report->has('operation') ? $this->Html->link($report->operation->bezeichnung, ['controller' => 'Operations', 'action' => 'view', $report->operation->id]) : '' ?></td>
                 <td><?= h($report->datum) ?></td>
                 <td><?= h($report->beschreibung) ?></td>
