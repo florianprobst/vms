@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
+use Cake\ORM\TableRegistry;
 
 /**
  * Valves Controller
@@ -18,12 +20,14 @@ class ValvesController extends AppController
      */
     public function index()
     {
+    		$conditions = TableRegistry::get('Conditions')->find('all')->all();
+    		
         $this->paginate = [
-            'contain' => ['Manufacturers', 'Stocks', 'Customers', 'Flangetypes', 'Valvetypes', 'Actuators', 'Materials', 'Gaskets', 'Boltings']
+            'contain' => ['Manufacturers', 'Stocks', 'Customers', 'Flangetypes', 'Valvetypes', 'Actuators', 'Materials', 'Gaskets', 'Boltings', 'Reports']
         ];
-        $valves = $this->paginate($this->Valves);
-
-        $this->set(compact('valves'));
+        
+        $this->set('valves', $this->paginate($this->Valves));
+        $this->set('conditions', $conditions);
         $this->set('_serialize', ['valves']);
     }
 
@@ -55,12 +59,29 @@ class ValvesController extends AppController
         if ($this->request->is('post')) {
             $valf = $this->Valves->patchEntity($valf, $this->request->data);
             if ($this->Valves->save($valf)) {
-                $this->Flash->success(__('The valf has been saved.'));
+                //report mit status "erfasst" anlegen
+				        $reportsTable = TableRegistry::get('Reports');
+				        $report = $reportsTable->newEntity();
+				        $report->valve_id = $valf->id;
+				        $report->operation_id = 7; //erfassung
+				        $report->datum = new Time(Time::now(), 'Germany/Berlin');
+				        $report->beschreibung = 'Aufnahme in das System';
+				        $report->condition_id = 5; //zustand 'erfasst'
+				        //$report->bild = "";
+				        if($reportsTable->save($report)){
+				        	$reportid = $report->id;
+				        }else{
+				        	$this->Flash->error(__('Report for this valve could not be saved. Please check valve dataset'));
+				        }
+                $this->Flash->success(__('The valve has been saved. eTag:' . $valf->etag));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The valf could not be saved. Please, try again.'));
+                $this->Flash->error(__('The valve could not be saved. Please, try again.'));
             }
         }
+        
+        
+        
         $manufacturers = $this->Valves->Manufacturers->find('list', ['limit' => 200]);
         $stocks = $this->Valves->Stocks->find('list', ['limit' => 200]);
         $customers = $this->Valves->Customers->find('list', ['limit' => 200]);
@@ -92,7 +113,7 @@ class ValvesController extends AppController
                 $this->Flash->success(__('The valf has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The valf could not be saved. Please, try again.'));
+                $this->Flash->error(__('The valve could not be saved. Please, try again.'));
             }
         }
         $manufacturers = $this->Valves->Manufacturers->find('list', ['limit' => 200]);
