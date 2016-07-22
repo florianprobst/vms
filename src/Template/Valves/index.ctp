@@ -50,8 +50,42 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($valves as $valf): ?>
-            <tr>
+            <?php foreach ($valves as $valf): 
+            	if(count($valf->reports) > 0){
+              	$report = $valf->reports[0];
+              	$condition = false;
+              	foreach ($conditions as $cond){ 
+              		if($cond->id == $report->condition_id) {
+              		 $condition = $cond;
+              		} 
+              	}
+              	
+              	switch($report->condition_id){
+              		case 1:
+              			$color = 'DarkSlateGrey ';
+              			break;
+              		case 2:
+              			$color = 'LawnGreen';
+              			break;
+              		case 3:
+              			$color = 'Yellow';
+              			break;
+              		case 4:
+              			$color = 'Crimson';
+              			break;
+              		case 5:
+              			$color = 'Cyan';
+              			break;
+              		default:
+              			$color='none';
+              	}              	
+              }else{
+              	$condition = false;
+              	$report = false;
+              	$color='DarkSlateGrey ';
+              }
+            ?>
+            <tr style='background-color: <?= h($color); ?>;'>
                 <td><?= h($valf->etag) ?></td>
                 <td><?= $valf->has('stock') ? $this->Html->link($valf->stock->lagerort, ['controller' => 'Stocks', 'action' => 'view', $valf->stock->id]) : '' ?></td>
                 <td><?= $valf->has('manufacturer') ? $this->Html->link($valf->manufacturer->name, ['controller' => 'Manufacturers', 'action' => 'view', $valf->manufacturer->id]) : '' ?></td>
@@ -61,11 +95,9 @@
                 <td><?= $this->Number->format($valf->dn) ?></td>
                 <td><?= $this->Number->format($valf->pn) ?></td>
                 <td><?= $this->Number->format($valf->einbaulaenge) ?></td>
-                <? if(count($valf->reports) > 0){
-                	$report = $valf->reports[0];
-                ?>
+                <? if($report) { ?>
                 <td><?= h($report->datum) ?></td>
-                <td><? foreach ($conditions as $condition){ if($condition->id == $report->condition_id) {echo $condition->bezeichnung;} } ?></td>
+                <td><? if($condition) { echo h($condition->bezeichnung); } ?></td>
                 <td><?= h($report->beschreibung) ?></td>
                 <? }else{ ?>
                 <td>&nbsp;</td>
