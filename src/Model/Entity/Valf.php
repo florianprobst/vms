@@ -26,6 +26,7 @@ use Cake\ORM\Entity;
  * @property string $kopfdichtungabmessung
  * @property int $gasket_id
  * @property string $spindelabmessungen
+ * @property int $spindelmaterial_id
  * @property string $stopfbuchsenbrilleabmessungen
  * @property int $anzahlpackungsringe
  * @property string $packungsringabmessung
@@ -41,6 +42,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Valvetype $valvetype
  * @property \App\Model\Entity\Actuator $actuator
  * @property \App\Model\Entity\Material $material
+ * @property \App\Model\Entity\Material $spindelmaterial
  * @property \App\Model\Entity\Gasket $gasket
  * @property \App\Model\Entity\Bolting $bolting
  * @property \App\Model\Entity\Report[] $reports

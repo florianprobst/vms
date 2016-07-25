@@ -41,7 +41,7 @@ class ValvesController extends AppController
     public function view($id = null)
     {
         $valf = $this->Valves->get($id, [
-            'contain' => ['Manufacturers', 'Stocks', 'Customers', 'Flangetypes', 'Valvetypes', 'Actuators', 'Materials', 'Gaskets', 'Boltings', 'Reports']
+            'contain' => ['Manufacturers', 'Stocks', 'Customers', 'Flangetypes', 'Valvetypes', 'Actuators', 'Materials', 'Spindelmaterials', 'Gaskets', 'Boltings', 'Reports']
         ]);
         
         $conditions = TableRegistry::get('Conditions')->find('all')->all();
@@ -95,7 +95,8 @@ class ValvesController extends AppController
         $materials = $this->Valves->Materials->find('list', ['limit' => 200]);
         $gaskets = $this->Valves->Gaskets->find('list', ['limit' => 200]);
         $boltings = $this->Valves->Boltings->find('list', ['limit' => 200]);
-        $this->set(compact('valf', 'manufacturers', 'stocks', 'customers', 'flangetypes', 'valvetypes', 'actuators', 'materials', 'gaskets', 'boltings'));
+        $spindelmaterials = $materials;
+        $this->set(compact('valf', 'manufacturers', 'stocks', 'customers', 'flangetypes', 'valvetypes', 'actuators', 'materials', 'spindelmaterials', 'gaskets', 'boltings'));
         $this->set('_serialize', ['valf']);
     }
 
@@ -129,7 +130,8 @@ class ValvesController extends AppController
         $materials = $this->Valves->Materials->find('list', ['limit' => 200]);
         $gaskets = $this->Valves->Gaskets->find('list', ['limit' => 200]);
         $boltings = $this->Valves->Boltings->find('list', ['limit' => 200]);
-        $this->set(compact('valf', 'manufacturers', 'stocks', 'customers', 'flangetypes', 'valvetypes', 'actuators', 'materials', 'gaskets', 'boltings'));
+        $spindelmaterials = $materials;
+        $this->set(compact('valf', 'manufacturers', 'stocks', 'customers', 'flangetypes', 'valvetypes', 'actuators', 'materials', 'spindelmaterials', 'gaskets', 'boltings'));
         $this->set('_serialize', ['valf']);
     }
 

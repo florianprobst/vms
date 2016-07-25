@@ -53,6 +53,8 @@
 				echo h($condition->bezeichnung);
 				?>
 			</td>
+			<th>Typ-Nr. (Kunde)</th>
+			<td><?= h($valf->typenklasse_kunde) ?></td>
 			<th>Letzte &Auml;nderung</th>
 			<td>
 				<?php if (!empty($valf->reports)): ?>
@@ -77,7 +79,7 @@
 					</tr>
 					<tr style='border: 0px solid black;'>
 						<td style='padding:0px'>&nbsp;</td>
-						<td style='padding:0px'>&nbsp;</td>
+						<td style='padding:0px'>&nbsp;<?= $valf->has('spindelmaterial_id') ? $valf->spindelmaterial->werkstoffnummer : '' ?></td>
 						<td style='padding:0px'>&nbsp;&nbsp;&nbsp;<?= h($valf->spindelabmessungen) ?> mm</td>
 					</tr>
 					<tr style='border: 0px solid black;'>
@@ -115,13 +117,17 @@
 			<th>Einbaul&auml;nge</th>
 			<td><?= $this->Number->format($valf->einbaulaenge) ?></td>
 			<th>Flanschform</th>
-			<td colspan='2'><?= $valf->has('flangetype') ? $valf->manufacturer->bezeichnung : '' ?></td>
+			<td colspan='2'><?= $valf->has('flangetype') ? $valf->flangetype->bezeichnung : '' ?></td>
 		</tr>
 		<tr>
-			<th>Werkstoff</th>
-			<td><?= $valf->has('material') ? $valf->manufacturer->full_name : '' ?></td>
+			<th>Geh&auml;usewerkstoff</th>
+			<td colspan='4'><?= $valf->has('material') ? $valf->material->full_name : '' ?></td>
+		</tr>
+		<tr>
 			<th>Baujahr</th>
-			<td colspan='2'><?= $this->Number->format($valf->baujahr) ?></td>
+			<td><?= h($valf->baujahr) ?></td>
+			<th>Medium</th>
+			<td><?= h($valf->medium) ?></td>
 		</tr>
 		<tr>
 			<th>Verschraubung</th>
@@ -151,9 +157,9 @@
 			<td colspan='8'><h4>Bet&auml;tigungsart / Antriebsdaten</h4></td>
 		</tr>
 		<tr>
-			<th>Bet&auml;tigungsart / Antrieb</th>
-			<td><?= $valf->has('actuator') ? h($valf->actuator->bezeichnung) : '' ?></td>
-			<th>Seriennummer (Antrieb)</th>
+			<th>Bet&auml;tigungsart</th>
+			<td colspan='2'><?= $valf->has('actuator') ? h($valf->actuator->bezeichnung) : '' ?></td>
+			<th>Seriennummer</th>
 			<td><?= h($valf->actuatorsn) ?></td>
 		</tr>
 		<tr>

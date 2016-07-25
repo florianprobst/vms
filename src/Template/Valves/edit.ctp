@@ -54,6 +54,7 @@
             echo $this->Form->input('kopfdichtungabmessung');
             echo $this->Form->input('gasket_id', ['options' => $gaskets, 'empty' => true]);
             echo $this->Form->input('spindelabmessungen');
+            echo $this->Form->input('spindelmaterial_id', ['options' => $materials, 'empty' => true]);
             echo $this->Form->input('stopfbuchsenbrilleabmessungen');
             echo $this->Form->input('anzahlpackungsringe');
             echo $this->Form->input('packungsringabmessung');

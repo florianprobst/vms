@@ -66,6 +66,11 @@ class ValvesTable extends Table
         $this->belongsTo('Materials', [
             'foreignKey' => 'material_id'
         ]);
+        $this->belongsTo('Spindelmaterials', [
+            'className' => 'Materials',
+            'foreignKey' => 'spindelmaterial_id',
+            'propertyName' => 'spindelmaterial'
+        ]);
         $this->belongsTo('Gaskets', [
             'foreignKey' => 'gasket_id'
         ]);
@@ -172,6 +177,7 @@ class ValvesTable extends Table
         $rules->add($rules->existsIn(['valvetype_id'], 'Valvetypes'));
         $rules->add($rules->existsIn(['actuator_id'], 'Actuators'));
         $rules->add($rules->existsIn(['material_id'], 'Materials'));
+        $rules->add($rules->existsIn(['spindelmaterial_id'], 'Materials'));
         $rules->add($rules->existsIn(['gasket_id'], 'Gaskets'));
         $rules->add($rules->existsIn(['bolting_id'], 'Boltings'));
         return $rules;
