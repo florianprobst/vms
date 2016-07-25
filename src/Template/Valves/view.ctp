@@ -28,137 +28,168 @@
     </ul>
 </nav>
 <div class="valves view large-9 medium-8 columns content">
-    <h3><?= h($valf->etag) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th><?= __('Manufacturer') ?></th>
-            <td><?= $valf->has('manufacturer') ? $this->Html->link($valf->manufacturer->name, ['controller' => 'Manufacturers', 'action' => 'view', $valf->manufacturer->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Stock') ?></th>
-            <td><?= $valf->has('stock') ? $this->Html->link($valf->stock->lagerort, ['controller' => 'Stocks', 'action' => 'view', $valf->stock->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Customer') ?></th>
-            <td><?= $valf->has('customer') ? $this->Html->link($valf->customer->name, ['controller' => 'Customers', 'action' => 'view', $valf->customer->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Etag') ?></th>
-            <td><?= h($valf->etag) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Flangetype') ?></th>
-            <td><?= $valf->has('flangetype') ? $this->Html->link($valf->flangetype->bezeichnung, ['controller' => 'Flangetypes', 'action' => 'view', $valf->flangetype->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Valvetype') ?></th>
-            <td><?= $valf->has('valvetype') ? $this->Html->link($valf->valvetype->bezeichnung, ['controller' => 'Valvetypes', 'action' => 'view', $valf->valvetype->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Actuator') ?></th>
-            <td><?= $valf->has('actuator') ? $this->Html->link($valf->actuator->bezeichnung, ['controller' => 'Actuators', 'action' => 'view', $valf->actuator->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Actuatorsn') ?></th>
-            <td><?= h($valf->actuatorsn) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Besonderheiten') ?></th>
-            <td><?= h($valf->besonderheiten) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Material') ?></th>
-            <td><?= $valf->has('material') ? $this->Html->link($valf->material->full_name, ['controller' => 'Materials', 'action' => 'view', $valf->material->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Kopfdichtungabmessung') ?></th>
-            <td><?= h($valf->kopfdichtungabmessung) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Gasket') ?></th>
-            <td><?= $valf->has('gasket') ? $this->Html->link($valf->gasket->name, ['controller' => 'Gaskets', 'action' => 'view', $valf->gasket->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Spindelabmessungen') ?></th>
-            <td><?= h($valf->spindelabmessungen) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Stopfbuchsenbrilleabmessungen') ?></th>
-            <td><?= h($valf->stopfbuchsenbrilleabmessungen) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Packungsringabmessung') ?></th>
-            <td><?= h($valf->packungsringabmessung) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Grundringabmessung') ?></th>
-            <td><?= h($valf->grundringabmessung) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Bolting') ?></th>
-            <td><?= $valf->has('bolting') ? $this->Html->link($valf->bolting->full_name, ['controller' => 'Boltings', 'action' => 'view', $valf->bolting->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($valf->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Dn') ?></th>
-            <td><?= $this->Number->format($valf->dn) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Pn') ?></th>
-            <td><?= $this->Number->format($valf->pn) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Einbaulaenge') ?></th>
-            <td><?= $this->Number->format($valf->einbaulaenge) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Baujahr') ?></th>
-            <td><?= $this->Number->format($valf->baujahr) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('D0') ?></th>
-            <td><?= $this->Number->format($valf->d0) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Ansprechdruck') ?></th>
-            <td><?= $this->Number->format($valf->ansprechdruck) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Anzahlpackungsringe') ?></th>
-            <td><?= $this->Number->format($valf->anzahlpackungsringe) ?></td>
-        </tr>
-    </table>
+	<table>
+		<tr>
+			<td colspan='8'><h4>Kopfdaten</h4></td>
+		</tr>
+		<tr>
+			<th>eTag</th>
+			<td><?= h($valf->etag) ?></td>
+			<th>Lagerort</th>
+			<td><?= $valf->has('stock') ? $valf->stock->lagerort : '' ?></td>
+			<th>Kunde</th>
+			<td colspan='3'><?= $valf->has('customer') ? $valf->customer->name : '' ?></td>
+		</tr>
+		<tr>
+			<th>Status</th>
+			<td colspan='3'>
+				<?
+				$condition = '';
+				foreach ($conditions as $cond){
+					if($cond->id == $valf->reports[0]->condition_id) {
+					$condition = $cond;
+					}
+				}
+				echo h($condition->bezeichnung);
+				?>
+			</td>
+			<th>Letzte &Auml;nderung</th>
+			<td>
+				<?php if (!empty($valf->reports)): ?>
+					<?= h($valf->reports[0]->datum); ?>
+				<?php endif; ?>
+			</td>
+		</tr>
+		<tr>
+			<td colspan='8'><h4>Armaturendaten</h4></td>
+		</tr>
+		<tr>
+			<th>Typ</th>
+			<td><?= $valf->has('valvetype') ? $valf->valvetype->bezeichnung : '' ?></td>
+			<th>Hersteller</th>
+			<td colspan='2'><?= $valf->has('manufacturer') ? $valf->manufacturer->name : '' ?></td>
+			<td colspan='3' rowspan='6' style='width: 321px;height:353px;table-layout: fixed; border-none; background-image:url(https://www.gidema.de/vms/img/valve_datasheet.jpg);background-repeat:no-repeat;vertical-align:top'>
+				<table style='background-color: transparent; border: 0px solid black;'>
+					<tr style='border: 0px solid black;'>
+						<td style='width:65px;height:14px;min-width:0px;line-height:0px;padding:0px'>&nbsp;</td>
+						<td style='width:60px;height:12px;min-width:0px;line-height:0px;padding:0px'>&nbsp;</td>
+						<td style='width:201px;height:12px;min-width:0px;line-height:0px;padding:0px'>&nbsp;</td>
+					</tr>
+					<tr style='border: 0px solid black;'>
+						<td style='padding:0px'>&nbsp;</td>
+						<td style='padding:0px'>&nbsp;</td>
+						<td style='padding:0px'>&nbsp;&nbsp;&nbsp;<?= h($valf->spindelabmessungen) ?> mm</td>
+					</tr>
+					<tr style='border: 0px solid black;'>
+						<td colspan='3' style='height:40px'>&nbsp;</td>
+					</tr>
+					<tr style='border: 0px solid black;'>
+						<td colspan='2' style='padding:0px'>&nbsp;</td>
+						<td style='padding:0px'><?= h($valf->stopfbuchsenbrilleabmessungen) ?></td>
+					</tr>
+					<tr style='border: 0px solid black;'>
+						<td colspan='3' style='height:80px'>&nbsp;</td>
+					</tr>
+					<tr style='border: 0px solid black;'>
+						<td style='padding:0px'>&nbsp;</td>
+						<td colspan='2' style='padding:0px'>&nbsp;&nbsp;&nbsp;&nbsp;<?= h($valf->anzahlpackungsringe) ?> Stk. <?= h($valf->packungsringabmessung) ?></td>
+					</tr>
+					
+					<tr style='border: 0px solid black;'>
+						<td colspan='3' style='height:45px'>&nbsp;</td>
+					</tr>
+					<tr style='border: 0px solid black;'>
+						<td colspan='2' style='padding:0px'>&nbsp;</td>
+						<td style='padding:0px'><?= h($valf->grundringabmessung) ?></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<th>DN</th>
+			<td><?= $this->Number->format($valf->dn) ?></td>
+			<th>PN</th>
+			<td colspan='2'><?= $this->Number->format($valf->pn) ?></td>
+		</tr>
+		<tr>
+			<th>Einbaul&auml;nge</th>
+			<td><?= $this->Number->format($valf->einbaulaenge) ?></td>
+			<th>Flanschform</th>
+			<td colspan='2'><?= $valf->has('flangetype') ? $valf->manufacturer->bezeichnung : '' ?></td>
+		</tr>
+		<tr>
+			<th>Werkstoff</th>
+			<td><?= $valf->has('material') ? $valf->manufacturer->full_name : '' ?></td>
+			<th>Baujahr</th>
+			<td colspan='2'><?= $this->Number->format($valf->baujahr) ?></td>
+		</tr>
+		<tr>
+			<th>Verschraubung</th>
+			<td colspan='4'><?= $valf->has('bolting') ? h($valf->bolting->full_name) : '' ?></td>
+		</tr>
+		<?php if($valf->valvetype->bezeichnung == 'Sicherheitsventil'): ?>
+		<tr>
+			<th>Ansprechdruck</th>
+			<td><?= $this->Number->format($valf->ansprechdruck) ?></td>
+			<th colspan='2'>D0 (kleinster Str&ouml;mungsdurchlauf)</th>
+			<td><?= $this->Number->format($valf->d0) ?></td>
+		</tr>
+		<?php endif; ?>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan='8'><h4>Kopfdichtung</h4></td>
+		</tr>
+		<tr>
+			<th>Abmessungen</th>
+			<td><?= h($valf->kopfdichtungabmessung) ?></td>
+			<th>Dichtung</th>
+			<td colspan='6'><?= $valf->has('gasket') ? h($valf->gasket->name) : '' ?></td>
+		</tr>
+		<tr>
+			<td colspan='8'><h4>Bet&auml;tigungsart / Antriebsdaten</h4></td>
+		</tr>
+		<tr>
+			<th>Bet&auml;tigungsart / Antrieb</th>
+			<td><?= $valf->has('actuator') ? h($valf->actuator->bezeichnung) : '' ?></td>
+			<th>Seriennummer (Antrieb)</th>
+			<td><?= h($valf->actuatorsn) ?></td>
+		</tr>
+		<tr>
+			<td colspan='8'><h4>Bemerkungen / besondere Merkmale</h4></td>
+		</tr>
+		<tr>
+			<td colspan='8'><?= h($valf->besonderheiten) ?></td>
+		</tr>
+	</table>
+	<table class="vertical-table">
     <div class="related">
-        <h4><?= __('Related Reports') ?></h4>
+        <h4>Historie / Bearbeitungsverlauf</h4>
         <?php if (!empty($valf->reports)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Valve Id') ?></th>
-                <th><?= __('Operation Id') ?></th>
                 <th><?= __('Datum') ?></th>
-                <th><?= __('Beschreibung') ?></th>
-                <th><?= __('Condition Id') ?></th>
-                <th><?= __('Bild') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+                <th colspan='2'>T&auml;tigkeit</th>
+                <th colspan='2'>Zustand</th>
+                <th colspan='3'><?= __('Bild') ?></th>
             </tr>
             <?php foreach ($valf->reports as $reports): ?>
             <tr>
-                <td><?= h($reports->id) ?></td>
-                <td><?= h($reports->valve_id) ?></td>
-                <td><?= h($reports->operation_id) ?></td>
                 <td><?= h($reports->datum) ?></td>
-                <td><?= h($reports->beschreibung) ?></td>
-                <td><?= h($reports->condition_id) ?></td>
-                <td><?= h($reports->bild) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Reports', 'action' => 'view', $reports->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Reports', 'action' => 'edit', $reports->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Reports', 'action' => 'delete', $reports->id], ['confirm' => __('Are you sure you want to delete # {0}?', $reports->id)]) ?>
+                <td colspan='2'><?= h($reports->beschreibung) ?></td>
+                <td colspan='2'>
+                <?
+									$condition = '';
+									foreach ($conditions as $cond){
+										if($cond->id == $reports->condition_id) {
+										$condition = $cond;
+										}
+									}
+									echo h($condition->bezeichnung);
+									?>                
                 </td>
+                <td colspan='3'><?= h($reports->bild) ?></td>
             </tr>
             <?php endforeach; ?>
         </table>

@@ -43,8 +43,12 @@ class ValvesController extends AppController
         $valf = $this->Valves->get($id, [
             'contain' => ['Manufacturers', 'Stocks', 'Customers', 'Flangetypes', 'Valvetypes', 'Actuators', 'Materials', 'Gaskets', 'Boltings', 'Reports']
         ]);
+        
+        $conditions = TableRegistry::get('Conditions')->find('all')->all();
+        //$condition = $conditions->get($valf->condition_id)
 
         $this->set('valf', $valf);
+        $this->set('conditions', $conditions);
         $this->set('_serialize', ['valf']);
     }
 

@@ -31,6 +31,8 @@ use Cake\ORM\Entity;
  * @property string $packungsringabmessung
  * @property string $grundringabmessung
  * @property int $bolting_id
+ * @property string $typenklasse_kunde
+ * @property string $medium
  *
  * @property \App\Model\Entity\Manufacturer $manufacturer
  * @property \App\Model\Entity\Stock $stock

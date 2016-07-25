@@ -53,6 +53,8 @@
             echo $this->Form->input('packungsringabmessung');
             echo $this->Form->input('grundringabmessung');
             echo $this->Form->input('bolting_id', ['options' => $boltings, 'empty' => true]);
+            echo $this->Form->input('typenklasse_kunde');
+            echo $this->Form->input('medium');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

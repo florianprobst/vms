@@ -145,6 +145,12 @@ class ValvesTable extends Table
 
         $validator
             ->allowEmpty('grundringabmessung');
+            
+        $validator
+            ->allowEmpty('typenklasse_kunde');
+            
+        $validator
+            ->allowEmpty('medium');
 
         return $validator;
     }
