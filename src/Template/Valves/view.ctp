@@ -71,9 +71,9 @@
 			<td colspan='3' rowspan='6' style='width: 321px;height:353px;table-layout: fixed; border-none; background-image:url(https://www.gidema.de/vms/img/valve_datasheet.jpg);background-repeat:no-repeat;vertical-align:top'>
 				<table style='background-color: transparent; border: 0px solid black;'>
 					<tr style='border: 0px solid black;'>
-						<td style='width:65px;height:14px;min-width:0px;line-height:0px;padding:0px'>&nbsp;</td>
+						<td style='width:85px;height:14px;min-width:0px;line-height:0px;padding:0px'>&nbsp;</td>
 						<td style='width:60px;height:12px;min-width:0px;line-height:0px;padding:0px'>&nbsp;</td>
-						<td style='width:201px;height:12px;min-width:0px;line-height:0px;padding:0px'>&nbsp;</td>
+						<td style='width:176px;height:12px;min-width:0px;line-height:0px;padding:0px'>&nbsp;</td>
 					</tr>
 					<tr style='border: 0px solid black;'>
 						<td style='padding:0px'>&nbsp;</td>
