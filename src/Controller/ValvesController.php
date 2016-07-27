@@ -131,7 +131,11 @@ class ValvesController extends AppController
         $gaskets = $this->Valves->Gaskets->find('list', ['limit' => 200]);
         $boltings = $this->Valves->Boltings->find('list', ['limit' => 200]);
         $spindelmaterials = $materials;
+        
+        $conditions = TableRegistry::get('Conditions')->find('all')->all();
+        
         $this->set(compact('valf', 'manufacturers', 'stocks', 'customers', 'flangetypes', 'valvetypes', 'actuators', 'materials', 'spindelmaterials', 'gaskets', 'boltings'));
+        $this->set('conditions', $conditions);
         $this->set('_serialize', ['valf']);
     }
 
